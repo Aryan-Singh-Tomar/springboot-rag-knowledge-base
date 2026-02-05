@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: kb-rag-api
+  datasource:
+    url: jdbc:postgresql://localhost:9800/kbdb
+    username: {DB_USERNAME}
+    password: (DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: kb
+  ai:
+    openai:
+      api-key: ${OPEN_API_EY}
+      chat:
+        options:
+          model: gpt-4o-mini
+      embedding:
+        options:
+          model: text-embedding-3-small
+
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+        schema-name: kb
+        table-name: vector_store
+        index-type: HNSW
+        distance-type: COSINE_DISTANCE
+        dimensions: 1536
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+app:
+  jwt:
+    secret: ${SECRET_KEY}
+    accessMinutes: 15
+    refreshDays: 7
