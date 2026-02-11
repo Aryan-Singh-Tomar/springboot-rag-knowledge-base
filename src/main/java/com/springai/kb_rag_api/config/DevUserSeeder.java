@@ -14,15 +14,17 @@ public class DevUserSeeder {
         return args -> {
             if (!userRepository.existsByUsername("demo")) {
                 UserEntity u = new UserEntity();
-                UserEntity u1 = new UserEntity();
                 u.setUsername("demo");
-                u1.setUsername("user");
                 u.setPasswordHash(encoder.encode("demo123"));
-                u1.setPasswordHash(encoder.encode("user123"));
-                u1.setRole("ROLE_USER");
                 u.setRole("ROLE_USER");
                 userRepository.save(u);
-                userRepository.save(u1);
+            }
+            if (!userRepository.existsByUsername("user")) {
+                UserEntity u = new UserEntity();
+                u.setUsername("user");
+                u.setPasswordHash(encoder.encode("user123"));
+                u.setRole("ROLE_USER");
+                userRepository.save(u);
             }
         };
     }
