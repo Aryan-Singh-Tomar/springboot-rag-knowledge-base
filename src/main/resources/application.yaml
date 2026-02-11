@@ -2,9 +2,9 @@ spring:
   application:
     name: kb-rag-api
   datasource:
-    url: jdbc:postgresql://localhost:9800/kbdb
-    username: {DB_USERNAME}
-    password: (DB_PASSWORD}
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,7 +15,7 @@ spring:
         default_schema: kb
   ai:
     openai:
-      api-key: ${OPEN_API_EY}
+      api-key: ${SPRING_AI_OPENAI_API_KEY}
       chat:
         options:
           model: gpt-4o-mini
@@ -38,6 +38,6 @@ logging:
 
 app:
   jwt:
-    secret: ${SECRET_KEY}
+    secret: ${APP_JWT_SECRET}
     accessMinutes: 15
     refreshDays: 7
