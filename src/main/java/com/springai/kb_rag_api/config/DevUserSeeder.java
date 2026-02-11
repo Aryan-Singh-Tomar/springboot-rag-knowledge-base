@@ -26,6 +26,13 @@ public class DevUserSeeder {
                 u.setRole("ROLE_USER");
                 userRepository.save(u);
             }
+            if (!userRepository.existsByUsername("user1")) {
+                UserEntity u = new UserEntity();
+                u.setUsername("user1");
+                u.setPasswordHash(encoder.encode("user123"));
+                u.setRole("ROLE_USER");
+                userRepository.save(u);
+            }
         };
     }
 }
